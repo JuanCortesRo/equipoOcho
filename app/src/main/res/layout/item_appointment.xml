@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  HU 2.0 C3 – Ítem de la lista de citas. Lo usa AppointmentAdapter.
+  TODO [DE8 HU2.0]: MaterialCardView blanca, redondeada y con elevación; ImageView circular
+   (app:imageUrl="@{appointment.imageUrl}" app:circleCrop="@{true}"), petName, symptom y "#id" arriba a la derecha.
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="appointment"
+            type="com.equipoocho.dogapp.data.local.AppointmentEntity" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- HU 3.0 C6: síntomas fijos en la app. La posición 0 ("Síntomas") significa que no se eligió ninguno. -->
+    <string-array name="symptoms">
+        <item>Síntomas</item>
+        <item>Solo duerme</item>
+        <item>No come</item>
+        <item>Fractura extremidad</item>
+        <item>Tiene pulgas</item>
+        <item>Tiene garrapatas</item>
+        <item>Bota demasiado pelo</item>
+    </string-array>
+</resources>

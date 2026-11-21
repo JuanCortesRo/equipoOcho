@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CONTRATO COMPARTIDO (HT-01): grafo de navegación de las 5 HU.
+  Los IDs de las acciones y el argumento appointmentId son fijos: los usa todo el equipo con Safe Args.
+-->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <!-- HU 1.0 -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.equipoocho.dogapp.ui.login.LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <!-- popUpTo inclusive: el botón atrás del Home sale al escritorio (HU 2.0 C1) -->
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- HU 2.0 -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.equipoocho.dogapp.ui.home.HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_newAppointment"
+            app:destination="@id/newAppointmentFragment" />
+        <action
+            android:id="@+id/action_home_to_detail"
+            app:destination="@id/appointmentDetailFragment" />
+    </fragment>
+
+    <!-- HU 3.0 -->
+    <fragment
+        android:id="@+id/newAppointmentFragment"
+        android:name="com.equipoocho.dogapp.ui.newappointment.NewAppointmentFragment"
+        tools:layout="@layout/fragment_new_appointment">
+        <!-- C10: tras guardar vuelve al Home sin dejar el formulario en el back stack -->
+        <action
+            android:id="@+id/action_newAppointment_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- HU 4.0 -->
+    <fragment
+        android:id="@+id/appointmentDetailFragment"
+        android:name="com.equipoocho.dogapp.ui.detail.AppointmentDetailFragment"
+        tools:layout="@layout/fragment_appointment_detail">
+        <argument
+            android:name="appointmentId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detail_to_edit"
+            app:destination="@id/editAppointmentFragment" />
+        <!-- C4: tras eliminar vuelve al Home -->
+        <action
+            android:id="@+id/action_detail_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- HU 5.0 (la flecha atrás usa navigateUp() para volver al Detalle, C1) -->
+    <fragment
+        android:id="@+id/editAppointmentFragment"
+        android:name="com.equipoocho.dogapp.ui.edit.EditAppointmentFragment"
+        tools:layout="@layout/fragment_edit_appointment">
+        <argument
+            android:name="appointmentId"
+            app:argType="integer" />
+        <!-- C8: tras editar vuelve al Home -->
+        <action
+            android:id="@+id/action_edit_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

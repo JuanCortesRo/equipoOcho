@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HU 1.0 – Ventana Login. Sin toolbar y fondo gris oscuro (C1). -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray">
+
+        <!-- TODO: construir la UI según los criterios de la HU (ver el Fragment correspondiente). -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

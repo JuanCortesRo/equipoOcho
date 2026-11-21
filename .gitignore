@@ -1,0 +1,26 @@
+# Gradle / build
+.gradle/
+build/
+**/build/
+.kotlin/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Local (cada integrante tiene su propia ruta del SDK)
+local.properties
+
+# Firmas / secretos
+*.jks
+*.keystore
+google-services.json
+
+# SO
+.DS_Store
+Thumbs.db
+*.log

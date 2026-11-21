@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HU 4.0 – Detalle: include layout_curved_toolbar, CardView con la imagen, tarjeta de datos y 2 FAB. -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="com.equipoocho.dogapp.ui.detail.AppointmentDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- TODO: construir la UI según los criterios de la HU (ver el Fragment correspondiente). -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

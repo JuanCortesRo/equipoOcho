@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CONTRATO COMPARTIDO: textos literales de las HU. No escribir textos directo en los layouts. -->
+<resources>
+    <string name="app_name">dogApp</string>
+    <string name="dog_app_title">DogApp</string>
+
+    <!-- HU 1.0 Login -->
+    <string name="biometric_title">Autenticación con Biometría</string>
+    <string name="biometric_subtitle">Ingrese su huella digital</string>
+    <string name="biometric_cancel">Cancelar</string>
+
+    <!-- HU 2.0 Home -->
+    <string name="home_title">Administrador de Citas</string>
+    <string name="appointment_turn">#%1$d</string>
+
+    <!-- HU 3.0 / HU 5.0 Formularios -->
+    <string name="new_appointment_title">Nueva Cita</string>
+    <string name="edit_appointment_title">Editar Cita</string>
+    <string name="hint_pet_name">Nombre de la Mascota</string>
+    <string name="hint_breed">Raza</string>
+    <string name="hint_owner_name">Nombre del Propietario</string>
+    <string name="hint_phone">Teléfono</string>
+    <string name="save_appointment">Guardar Cita</string>
+    <string name="edit_appointment">Editar Cita</string>
+    <string name="select_symptom">Selecciona un síntoma</string>
+
+    <!-- HU 4.0 Detalle -->
+    <string name="owner_label">Propietario: %1$s</string>
+    <string name="phone_label">Teléfono: %1$s</string>
+
+    <!-- Accesibilidad -->
+    <string name="cd_back">Volver</string>
+    <string name="cd_add_appointment">Nueva cita</string>
+    <string name="cd_delete_appointment">Eliminar cita</string>
+    <string name="cd_edit_appointment">Editar cita</string>
+    <string name="cd_dog_image">Imagen de la mascota</string>
+    <string name="cd_fingerprint">Ingresar con huella</string>
+</resources>
