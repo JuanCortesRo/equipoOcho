@@ -2,7 +2,9 @@ package com.equipoocho.dogapp
 
 import android.app.Application
 import com.equipoocho.dogapp.data.local.AppDatabase
+import com.equipoocho.dogapp.data.remote.RetrofitClient
 import com.equipoocho.dogapp.data.repository.AppointmentRepository
+import com.equipoocho.dogapp.data.repository.BreedRepository
 
 /**
  * Application: contenedor de dependencias manual (sin Hilt).
@@ -21,5 +23,7 @@ class DogApp : Application() {
         AppointmentRepository(database.appointmentDao())
     }
 
-    // TODO [KAN HT-03]: exponer `breedRepository` (by lazy) usando RetrofitClient.
+    val breedRepository: BreedRepository by lazy {
+        BreedRepository(RetrofitClient.dogApiService)
+    }
 }
