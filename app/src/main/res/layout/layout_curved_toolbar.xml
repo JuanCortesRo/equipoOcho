@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  CONTRATO COMPARTIDO (HT-01): toolbar curva reutilizable (HU 3.0, 4.0 y 5.0, criterio 1).
-  Uso: <include android:id="@+id/toolbar" layout="@layout/layout_curved_toolbar" app:title="@{...}" />
-  El clic de la flecha lo asigna cada Fragment: binding.toolbar.btnBack.setOnClickListener { ... }
+  RECURSO COMPARTIDO: toolbar personalizada reutilizable.
+  Gris oscuro con las esquinas inferiores curvas, flecha atrás rosada a la izquierda y título blanco
+  bold centrado.
+
+  Uso en un layout con DataBinding:
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_curved_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@{@string/new_appointment_title}" />
+
+  El clic de la flecha lo asigna cada Fragment:
+    binding.toolbar.btnBack.setOnClickListener { findNavController().navigateUp() }
+
+  statusBarPadding (ver ui/common/WindowInsetsAdapters.kt): con targetSdk 35+ la app se dibuja detrás
+  de la barra de estado. La toolbar agrega ese alto como padding superior: el fondo gris se extiende
+  bajo la barra de estado y la flecha y el título quedan por debajo de ella.
 -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable name="title" type="String" />
@@ -13,33 +29,48 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="96dp"
-        android:background="@drawable/bg_curved_toolbar">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_curved_toolbar"
+        app:statusBarPadding="@{true}">
 
-        <!-- TODO [KAN HT-01]: ícono de flecha atrás rosado -->
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/cd_back"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarContent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbarContent"
             app:tint="@color/pink" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{title}"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
+        <View
+            android:id="@+id/toolbarContent"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/toolbar_height"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="64dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{title}"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarContent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbarContent"
+            tools:text="Nueva Cita" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
