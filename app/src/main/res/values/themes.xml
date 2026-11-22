@@ -4,6 +4,8 @@
     <style name="Theme.DogApp" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/focus_purple</item>
         <item name="colorSecondary">@color/pink</item>
+        <!-- Estilo por defecto de todos los TextInputLayout (ver styles.xml). -->
+        <item name="textInputStyle">@style/Widget.DogApp.TextInputLayout</item>
         <item name="android:windowBackground">@color/white</item>
         <!-- Barra de estado gris oscuro con íconos blancos. statusBarColor solo aplica hasta Android 14;
              desde Android 15 la franja la pinta el fondo de activity_main.xml. -->
