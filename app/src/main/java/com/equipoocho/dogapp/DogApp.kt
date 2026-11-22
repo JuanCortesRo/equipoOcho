@@ -17,7 +17,7 @@ class DogApp : Application() {
 
     val database: AppDatabase by lazy { AppDatabase.getInstance(this) }
 
-    val appointment: AppointmentRepository by lazy {
+    val appointmentRepository: AppointmentRepository by lazy {
         AppointmentRepository(database.appointmentDao())
     }
 
