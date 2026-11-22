@@ -7,7 +7,6 @@ App Android que permite entrar con huella digital, ver las citas, crearlas, cons
 
 | | |
 |---|---|
-| Repositorio | https://github.com/JuanCortesRo/EquipoOcho |
 | Tablero Jira | https://dog-app-equipo-8.atlassian.net/jira/software/projects/KAN/boards/2 |
 | Sprint 1 | 12-nov-2026 → **26-nov-2026** |
 | Sprint 2 | ##-nov-2026 → **##-###-2026** |
