@@ -1,6 +1,6 @@
 ## Historia / tarea
-<!-- Clave de Jira en el título del PR: "DE8-12 feat(login): autenticación biométrica" -->
-- Jira: DE8-
+<!-- Clave de Jira en el título del PR: "KAN-12 feat(login): autenticación biométrica" -->
+- Jira: KAN-
 - HU / HT: <!-- p. ej. HU 1.0 Ventana Login -->
 
 ## Criterios de aceptación cubiertos
@@ -27,4 +27,4 @@
 - [ ] Respeta MVVM: el Fragment no accede a Room ni a Retrofit, solo al ViewModel
 - [ ] Textos en `strings.xml` y colores en `colors.xml` (nada hardcodeado)
 - [ ] No modifiqué contratos compartidos (entidad, DAO, repositorios, nav_graph) sin avisar al equipo
-- [ ] Commits con formato `tipo(alcance): DE8-<n> descripción`
+- [ ] Commits con formato `tipo(alcance): KAN-<n> descripción`

@@ -9,13 +9,13 @@ import com.equipoocho.dogapp.databinding.FragmentLoginBinding
 
 /**
  * HU 1.0 – Ventana Login.
- * TODO [DE8 HU1.0] C1: fondo gris oscuro, sin toolbar.
- * TODO [DE8 HU1.0] C2: cabeza de perro arriba a la derecha (PNG transparente, responsive).
- * TODO [DE8 HU1.0] C3: título "DogApp" blanco, bold, con fuente externa (res/font), centrado bajo la imagen.
- * TODO [DE8 HU1.0] C4: animación Lottie de huella (res/raw) abajo al centro.
- * TODO [DE8 HU1.0] C5-C6: al tocar la huella, mostrar BiometricPrompt (ver BiometricHelper) y,
+ * TODO [KAN HU1.0] C1: fondo gris oscuro, sin toolbar.
+ * TODO [KAN HU1.0] C2: cabeza de perro arriba a la derecha (PNG transparente, responsive).
+ * TODO [KAN HU1.0] C3: título "DogApp" blanco, bold, con fuente externa (res/font), centrado bajo la imagen.
+ * TODO [KAN HU1.0] C4: animación Lottie de huella (res/raw) abajo al centro.
+ * TODO [KAN HU1.0] C5-C6: al tocar la huella, mostrar BiometricPrompt (ver BiometricHelper) y,
  *  si la autenticación es correcta, ir a action_login_to_home.
- * TODO [DE8 HU1.0] C7: ícono de la app "dogApp" (mipmap), distinto al que genera Android Studio por defecto.
+ * TODO [KAN HU1.0] C7: ícono de la app "dogApp" (mipmap), distinto al que genera Android Studio por defecto.
  */
 class LoginFragment : Fragment() {
 

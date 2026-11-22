@@ -9,13 +9,13 @@ import com.equipoocho.dogapp.databinding.FragmentHomeBinding
 
 /**
  * HU 2.0 – Home Administrador de Citas.
- * TODO [DE8 HU2.0] C1: el botón atrás debe salir al escritorio. Se resuelve con popUpTo inclusive
+ * TODO [KAN HU2.0] C1: el botón atrás debe salir al escritorio. Se resuelve con popUpTo inclusive
  *  en action_login_to_home (nav_graph); verificarlo en el dispositivo.
- * TODO [DE8 HU2.0] C2: fondo blanco; header gris oscuro con la esquina inferior izquierda curva, título
+ * TODO [KAN HU2.0] C2: fondo blanco; header gris oscuro con la esquina inferior izquierda curva, título
  *  "Administrador de Citas" blanco bold a la izquierda y centrado verticalmente; imagen del perro a la
  *  derecha con "DogApp" debajo.
- * TODO [DE8 HU2.0] C3/C5/C6: RecyclerView con AppointmentAdapter que observa HomeViewModel.appointments.
- * TODO [DE8 HU2.0] C4: FAB rosado #F05861 abajo a la derecha que lleva a action_home_to_newAppointment.
+ * TODO [KAN HU2.0] C3/C5/C6: RecyclerView con AppointmentAdapter que observa HomeViewModel.appointments.
+ * TODO [KAN HU2.0] C4: FAB rosado #F05861 abajo a la derecha que lleva a action_home_to_newAppointment.
  */
 class HomeFragment : Fragment() {
 

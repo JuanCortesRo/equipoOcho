@@ -9,8 +9,8 @@ import com.equipoocho.dogapp.data.remote.DogApiService
 class BreedRepository(private val api: DogApiService) {
 
     /** Lista plana de razas, p. ej. ["akita", "bulldog", "pug", ...]. */
-    suspend fun getBreeds(): List<String> = TODO("DE8 HT-03")
+    suspend fun getBreeds(): List<String> = TODO("KAN HT-03")
 
     /** URL de una imagen aleatoria de [breed], o null si la raza no existe o falla la red. */
-    suspend fun getRandomImageUrl(breed: String): String? = TODO("DE8 HT-03")
+    suspend fun getRandomImageUrl(breed: String): String? = TODO("KAN HT-03")
 }

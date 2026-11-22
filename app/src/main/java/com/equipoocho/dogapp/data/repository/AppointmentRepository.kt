@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.Flow
  */
 class AppointmentRepository(private val dao: AppointmentDao) {
 
-    fun getAppointments(): Flow<List<AppointmentEntity>> = TODO("DE8 HT-02")
+    fun getAppointments(): Flow<List<AppointmentEntity>> = TODO("KAN HT-02")
 
-    suspend fun getAppointment(id: Int): AppointmentEntity? = TODO("DE8 HT-02")
+    suspend fun getAppointment(id: Int): AppointmentEntity? = TODO("KAN HT-02")
 
-    suspend fun saveAppointment(appointment: AppointmentEntity): Long = TODO("DE8 HT-02")
+    suspend fun saveAppointment(appointment: AppointmentEntity): Long = TODO("KAN HT-02")
 
-    suspend fun updateAppointment(appointment: AppointmentEntity): Unit = TODO("DE8 HT-02")
+    suspend fun updateAppointment(appointment: AppointmentEntity): Unit = TODO("KAN HT-02")
 
-    suspend fun deleteAppointment(appointment: AppointmentEntity): Unit = TODO("DE8 HT-02")
+    suspend fun deleteAppointment(appointment: AppointmentEntity): Unit = TODO("KAN HT-02")
 }

@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 /**
  * Base de datos local SQLite con Room (HU 2.0 C6).
- * TODO [DE8 HT-02]: construir la instancia única (Room.databaseBuilder) y exponerla desde DogApp.
+ * TODO [KAN HT-02]: construir la instancia única (Room.databaseBuilder) y exponerla desde DogApp.
  */
 @Database(entities = [AppointmentEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

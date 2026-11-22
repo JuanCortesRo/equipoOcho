@@ -9,6 +9,6 @@ import androidx.databinding.BindingAdapter
  */
 @BindingAdapter(value = ["imageUrl", "circleCrop"], requireAll = false)
 fun ImageView.bindImageUrl(url: String?, circleCrop: Boolean?) {
-    // TODO [DE8 HT-01]: cargar con Glide (placeholder/error) y aplicar circleCrop() cuando circleCrop == true
+    // TODO [KAN HT-01]: cargar con Glide (placeholder/error) y aplicar circleCrop() cuando circleCrop == true
     //  (círculo en el ítem de Home, HU 2.0 C3; imagen rectangular en el Detalle, HU 4.0 C2).
 }

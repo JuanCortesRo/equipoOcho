@@ -1,28 +1,27 @@
 # DogApp — Agenda de citas para mascotas
 
-Miniproyecto 1 · Sprint 1 · *Desarrollo de Aplicaciones para Dispositivos Móviles*, Universidad del Valle (sede Cali).
+Miniproyecto 1 · *Desarrollo de Aplicaciones para Dispositivos Móviles*, Universidad del Valle (sede Cali).
 **Equipo:** EquipoOcho.
 
-App Android nativa para el administrador de una veterinaria. Permite entrar con huella digital, ver las citas, crearlas, consultarlas, editarlas y eliminarlas. Las citas se guardan en SQLite con Room. Las razas y las fotos de perros se consumen de la API REST [dog.ceo](https://dog.ceo/dog-api/).
-
-La especificación completa está en el documento de Historias de Usuario del Miniproyecto 1, publicado en el campus virtual.
+App Android que permite entrar con huella digital, ver las citas, crearlas, consultarlas, editarlas y eliminarlas. Las citas se guardan en SQLite con Room. Las razas y las fotos de perros se consumen de la API REST [dog.ceo](https://dog.ceo/dog-api/).
 
 | | |
 |---|---|
 | Repositorio | https://github.com/JuanCortesRo/EquipoOcho |
-| Tablero Jira | _(pegar enlace)_ — clave del proyecto **DE8** |
-| Sprint 1 | 12-nov-2026 → **26-nov-2026, 6:00 p. m.** (monitoría: 19-nov) |
+| Tablero Jira | https://dog-app-equipo-8.atlassian.net/jira/software/projects/KAN/boards/2 |
+| Sprint 1 | 12-nov-2026 → **26-nov-2026** |
+| Sprint 2 | ##-nov-2026 → **##-###-2026** |
 
 ## Equipo y responsabilidades
 
 | Integrante | Trabajo en el sprint | Rama sugerida |
 |---|---|---|
-| Juan José Cortés Rodríguez | HT-01 Base UI y navegación · HT-02 Room · HT-03 Retrofit · **HU 2.0 Home** · revisión de PRs e integración | `feature/DE8-<n>-base-ui`, `feature/DE8-<n>-room`, `feature/DE8-<n>-retrofit`, `feature/DE8-<n>-home` |
-| Alejandro Fernández Herrera | **HU 1.0 Login** (biometría, Lottie, fuente, ícono) | `feature/DE8-<n>-login-biometria` |
-| Jerson David Otero Cruz | **HU 3.0 Nueva Cita** | `feature/DE8-<n>-nueva-cita` |
-| Juan Pablo Robayo Maestre | **HU 4.0 Detalle** · **HU 5.0 Editar Cita** | `feature/DE8-<n>-detalle-cita`, `feature/DE8-<n>-editar-cita` |
+| Juan José Cortés Rodríguez | HT-01 Base UI y navegación · HT-02 Room · HT-03 Retrofit · **HU 2.0 Home** · revisión de PRs e integración | `feature/KAN-<n>-base-ui`, `feature/KAN-<n>-room`, `feature/KAN-<n>-retrofit`, `feature/KAN-<n>-home` |
+| Alejandro Fernández Herrera | **HU 1.0 Login** (biometría, Lottie, fuente, ícono) | `feature/KAN-<n>-login-biometria` |
+| Jerson David Otero Cruz | **HU 3.0 Nueva Cita** | `feature/KAN-<n>-nueva-cita` |
+| Juan Pablo Robayo Maestre | **HU 4.0 Detalle** · **HU 5.0 Editar Cita** | `feature/KAN-<n>-detalle-cita`, `feature/KAN-<n>-editar-cita` |
 
-`<n>` es el número que Jira le asigna a la historia al importar el backlog.
+`<n>` es el número que Jira le asigna a la historia.
 
 ## Stack
 
@@ -38,16 +37,9 @@ La especificación completa está en el documento de Historias de Usuario del Mi
 
 ## Arquitectura
 
-```
- Fragment (View + DataBinding)  ──observa──▶  ViewModel (LiveData)
-                                                   │
-                                                   ▼
-                                      Repository (única fuente de datos)
-                                        │                       │
-                                        ▼                       ▼
-                               Room: AppointmentDao     Retrofit: DogApiService
-                               (SQLite local)           (https://dog.ceo/api/)
-```
+<p align="center">
+  <img src=".github/assets/dogapp_arquitectura.svg" alt="Arquitectura MVVM de DogApp" width="700">
+</p>
 
 **Reglas**
 - El Fragment solo habla con su ViewModel.
@@ -71,8 +63,7 @@ app/src/main/java/com/equipoocho/dogapp/
    └─ edit/                   # HU 5.0
 ```
 
-### Contratos compartidos
-Estos archivos ya están definidos para que cada integrante avance sin esperar a los demás. **Si alguno necesita cambiar, avisa al equipo antes de hacerlo.**
+### Contratos 
 
 - `data/local/AppointmentEntity.kt`: campos de la cita. El `id` autogenerado es el "turno" (#n).
 - `data/local/AppointmentDao.kt`, `data/remote/DogApiService.kt`, `data/repository/*`: firmas de los métodos.
@@ -80,15 +71,13 @@ Estos archivos ya están definidos para que cada integrante avance sin esperar a
 - `res/values/strings.xml`, `colors.xml`, `arrays.xml`: textos literales de las HU, paleta (rosado `#F05861`) y lista de síntomas.
 - `res/layout/layout_curved_toolbar.xml` y `ui/common/BindingAdapters.kt`: componentes reutilizables.
 
-Cada archivo trae comentarios `TODO [DE8 HUx.x] Cn` con el criterio de aceptación que le corresponde. En Android Studio puedes listarlos todos en **View → Tool Windows → TODO**.
+Cada archivo trae comentarios `TODO [KAN HUx.x] Cn` con el criterio de aceptación que le corresponde.
 
 ### Endpoints de dog.ceo
 | Uso | Endpoint |
 |---|---|
 | Autocompletar la raza (HU 3.0 / 5.0) | `GET breeds/list/all` |
 | Foto de la mascota según su raza (HU 3.0 / 5.0, "Importante") | `GET breed/{raza}/images/random` |
-
-El PDF cita `breeds/image/random`, pero ese endpoint devuelve un perro de **cualquier** raza. Se usa la variante por raza para que la foto coincida con la raza elegida, que es lo que piden las HU. La URL se guarda en la cita al crearla o editarla.
 
 ## Cómo correr el proyecto
 1. Clonar: `git clone https://github.com/JuanCortesRo/EquipoOcho.git`. Luego `git checkout develop`.
@@ -101,6 +90,4 @@ El PDF cita `breeds/image/random`, pero ese endpoint devuelve un perro de **cual
 Para compilar por consola: `./gradlew assembleDebug`.
 
 ## Forma de trabajo
-Ramas, commits, PRs y flujo de Jira están en [CONTRIBUTING.md](CONTRIBUTING.md).
-
-**Regla de entrega:** el repositorio **no puede tener commits después del 26-nov-2026 a las 6:00 p. m.** (penalización de 0.2).
+Las convenciones están en [CONTRIBUTING.md](CONTRIBUTING.md).

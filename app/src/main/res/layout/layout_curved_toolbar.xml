@@ -16,7 +16,7 @@
         android:layout_height="96dp"
         android:background="@drawable/bg_curved_toolbar">
 
-        <!-- TODO [DE8 HT-01]: ícono de flecha atrás rosado -->
+        <!-- TODO [KAN HT-01]: ícono de flecha atrás rosado -->
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="48dp"

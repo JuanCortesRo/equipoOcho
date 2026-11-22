@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 
 /**
  * HU 4.0 – ViewModel del Detalle (recibe AppointmentRepository).
- * TODO [DE8 HU4.0] C1-C3: cargar `appointment: LiveData<AppointmentEntity?>` por appointmentId (Safe Args).
- * TODO [DE8 HU4.0] C4: delete() elimina de Room y emite el evento de navegar al Home.
+ * TODO [KAN HU4.0] C1-C3: cargar `appointment: LiveData<AppointmentEntity?>` por appointmentId (Safe Args).
+ * TODO [KAN HU4.0] C4: delete() elimina de Room y emite el evento de navegar al Home.
  */
 class AppointmentDetailViewModel : ViewModel()

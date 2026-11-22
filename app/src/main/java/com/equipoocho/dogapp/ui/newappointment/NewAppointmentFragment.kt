@@ -9,12 +9,12 @@ import com.equipoocho.dogapp.databinding.FragmentNewAppointmentBinding
 
 /**
  * HU 3.0 – Ventana Nueva Cita.
- * TODO [DE8 HU3.0] C1: toolbar curva (layout_curved_toolbar) con el título "Nueva Cita" y flecha rosada
+ * TODO [KAN HU3.0] C1: toolbar curva (layout_curved_toolbar) con el título "Nueva Cita" y flecha rosada
  *  que vuelve al Home.
- * TODO [DE8 HU3.0] C2-C5: TextInputLayout outlined con hint gris que sube con el foco y borde morado;
+ * TODO [KAN HU3.0] C2-C5: TextInputLayout outlined con hint gris que sube con el foco y borde morado;
  *  límites: mascota 15, propietario 30, teléfono 10 (solo números). Raza = AutoCompleteTextView (threshold 2).
- * TODO [DE8 HU3.0] C6: Spinner con @array/symptoms.
- * TODO [DE8 HU3.0] C7-C10: botón "Guardar Cita" rosado con ícono; el texto pasa a blanco bold cuando está habilitado.
+ * TODO [KAN HU3.0] C6: Spinner con @array/symptoms.
+ * TODO [KAN HU3.0] C7-C10: botón "Guardar Cita" rosado con ícono; el texto pasa a blanco bold cuando está habilitado.
  */
 class NewAppointmentFragment : Fragment() {
 

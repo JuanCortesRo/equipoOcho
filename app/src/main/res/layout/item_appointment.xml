@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   HU 2.0 C3 – Ítem de la lista de citas. Lo usa AppointmentAdapter.
-  TODO [DE8 HU2.0]: MaterialCardView blanca, redondeada y con elevación; ImageView circular
+  TODO [KAN HU2.0]: MaterialCardView blanca, redondeada y con elevación; ImageView circular
    (app:imageUrl="@{appointment.imageUrl}" app:circleCrop="@{true}"), petName, symptom y "#id" arriba a la derecha.
 -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
