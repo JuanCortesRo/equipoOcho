@@ -40,8 +40,6 @@ git fetch origin && git merge origin/develop   # o: git rebase origin/develop
 | `docs` | README u otra documentación |
 | `chore` | Gradle, dependencias o configuración |
 
-**Alcances:** `login`, `home`, `new-appointment`, `detail`, `edit`, `data`, `api`, `ui`, `nav`, `build`.
-
 Ejemplos:
 ```
 feat(login): KAN-8 muestra BiometricPrompt al tocar la huella

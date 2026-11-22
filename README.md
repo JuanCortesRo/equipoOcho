@@ -79,7 +79,7 @@ Cada archivo trae comentarios `TODO [KAN HUx.x] Cn` con el criterio de aceptaci�
 | Foto de la mascota según su raza (HU 3.0 / 5.0, "Importante") | `GET breed/{raza}/images/random` |
 
 ## Cómo correr el proyecto
-1. Clonar: `git clone https://github.com/JuanCortesRo/EquipoOcho.git`. Luego `git checkout develop`.
+1. Clonar: `git clone https://github.com/JuanCortesRo/equipoOcho.git`. Luego `git checkout develop`.
 2. En Android Studio: **File → Open**, elegir la carpeta del proyecto y esperar el *Gradle Sync*. Android Studio crea `local.properties` con la ruta de tu SDK.
 3. Requisitos: SDK de Android con **API 37** y JDK 21 o superior (el JBR de Android Studio sirve).
 4. Ejecutar en un emulador o dispositivo con **API 26 o superior**. Para probar la huella en el emulador:
