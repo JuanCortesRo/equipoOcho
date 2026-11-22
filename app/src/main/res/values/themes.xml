@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Sin ActionBar: cada pantalla trae su propia toolbar personalizada (HU 1.0 C1, HU 3.0/4.0/5.0 C1). -->
+    <!-- Sin ActionBar: las pantallas que la necesitan usan layout_curved_toolbar. -->
     <style name="Theme.DogApp" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/focus_purple</item>
         <item name="colorSecondary">@color/pink</item>
         <item name="android:windowBackground">@color/white</item>
+        <!-- Barra de estado gris oscuro con íconos blancos. statusBarColor solo aplica hasta Android 14;
+             desde Android 15 la franja la pinta el fondo de activity_main.xml. -->
         <item name="android:statusBarColor">@color/dark_gray</item>
     </style>
 </resources>
