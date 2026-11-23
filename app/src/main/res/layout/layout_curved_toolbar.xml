@@ -1,45 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  CONTRATO COMPARTIDO (HT-01): toolbar curva reutilizable (HU 3.0, 4.0 y 5.0, criterio 1).
-  Uso: <include android:id="@+id/toolbar" layout="@layout/layout_curved_toolbar" app:title="@{...}" />
-  El clic de la flecha lo asigna cada Fragment: binding.toolbar.btnBack.setOnClickListener { ... }
+  RECURSO COMPARTIDO: toolbar personalizada reutilizable.
+  Bloque gris oscuro con las esquinas inferiores curvas, flecha atrás rosada a la izquierda y título
+  blanco bold centrado. Empieza debajo de la barra de estado y deja un margen a cada lado.
+
+  Uso en un layout con DataBinding:
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_curved_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@{@string/new_appointment_title}" />
+
+  El clic de la flecha lo asigna cada Fragment:
+    binding.toolbar.btnBack.setOnClickListener { findNavController().navigateUp() }
+
+  Estructura: la raíz es un contenedor transparente cuyo padding lateral hace de "margen". No se usa
+  layout_margin en la raíz porque <include> lo descarta cuando define layout_width/layout_height.
+  No necesita manejar la barra de estado: MainActivity ya hace que todas las pantallas empiecen debajo.
 -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable name="title" type="String" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="96dp"
-        android:background="@drawable/bg_curved_toolbar">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/toolbar_margin_horizontal">
 
-        <!-- TODO [KAN HT-01]: ícono de flecha atrás rosado -->
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/cd_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/pink" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@drawable/bg_curved_toolbar">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{title}"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cd_back"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/pink" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="72dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@{title}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Nueva Cita" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

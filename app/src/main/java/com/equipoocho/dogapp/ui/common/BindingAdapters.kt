@@ -2,13 +2,27 @@ package com.equipoocho.dogapp.ui.common
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.equipoocho.dogapp.R
 
 /**
- * CONTRATO COMPARTIDO (HT-01): binding adapters que usan los layouts.
- * Uso en XML: app:imageUrl="@{appointment.imageUrl}" app:circleCrop="@{true}"
+ * RECURSO COMPARTIDO: carga una imagen desde una URL con Glide.
+ *
+ * Uso en XML con DataBinding:
+ *   app:imageUrl="@{appointment.imageUrl}"
+ *   app:imageUrl="@{appointment.imageUrl}" app:circleCrop="@{true}" para recorte circular
+ *
+ * - Mientras carga, si la URL es null o si la descarga falla, se muestra ic_pet_placeholder.
+ * - Sin circleCrop no se aplica ninguna transformacionn,
  */
 @BindingAdapter(value = ["imageUrl", "circleCrop"], requireAll = false)
 fun ImageView.bindImageUrl(url: String?, circleCrop: Boolean?) {
-    // TODO [KAN HT-01]: cargar con Glide (placeholder/error) y aplicar circleCrop() cuando circleCrop == true
-    //  (círculo en el ítem de Home, HU 2.0 C3; imagen rectangular en el Detalle, HU 4.0 C2).
+    val request = Glide.with(this)
+        .load(url)
+        .placeholder(R.drawable.ic_pet_placeholder)
+        .error(R.drawable.ic_pet_placeholder)
+        .fallback(R.drawable.ic_pet_placeholder)
+        .transition(DrawableTransitionOptions.withCrossFade())
+    (if (circleCrop == true) request.circleCrop() else request).into(this)
 }
