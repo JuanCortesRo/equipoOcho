@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- HU 3.0 – Nueva Cita: include layout_curved_toolbar, 4 TextInputLayout (two-way @={}), Spinner y botón Guardar. -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="com.equipoocho.dogapp.ui.newappointment.NewAppointmentViewModel" />
+        <variable
+            name="viewModel"
+            type="com.equipoocho.dogapp.ui.newappointment.NewAppointmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +14,15 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <!-- TODO: construir la UI según los criterios de la HU (ver el Fragment correspondiente). -->
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_curved_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/new_appointment_title}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
