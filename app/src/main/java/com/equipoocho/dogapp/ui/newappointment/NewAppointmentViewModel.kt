@@ -26,7 +26,7 @@ class NewAppointmentViewModel(
     val petName = MutableLiveData("")
     val breed = MutableLiveData("")
     val ownerName = MutableLiveData("")
-
+    val phone = MutableLiveData("")
     private val _breeds = MutableLiveData<List<String>>(emptyList())
     val breeds: LiveData<List<String>> = _breeds
 
