@@ -8,48 +8,26 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.room.Room
+import com.equipoocho.dogapp.DogApp
 import com.equipoocho.dogapp.R
-import com.equipoocho.dogapp.data.local.AppDatabase
-import com.equipoocho.dogapp.data.remote.DogApiService
-import com.equipoocho.dogapp.data.remote.RetrofitClient
-import com.equipoocho.dogapp.data.repository.AppointmentRepository
-import com.equipoocho.dogapp.data.repository.BreedRepository
 import com.equipoocho.dogapp.databinding.FragmentNewAppointmentBinding
 import com.equipoocho.dogapp.ui.common.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class NewAppointmentFragment : Fragment() {
 
     private var _binding: FragmentNewAppointmentBinding? = null
     private val binding get() = _binding!!
 
-
     private val viewModel: NewAppointmentViewModel by viewModels {
-        val appContext = requireContext().applicationContext
-        val database = Room.databaseBuilder(
-            appContext,
-            AppDatabase::class.java,
-            AppDatabase.DATABASE_NAME
-        ).build()
-        val appointmentRepo = AppointmentRepository(database.appointmentDao())
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(RetrofitClient.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val breedRepo = BreedRepository(retrofit.create(DogApiService::class.java))
-
+        val app = requireActivity().application as DogApp
         ViewModelFactory {
             NewAppointmentViewModel(
-                appointmentRepository = appointmentRepo,
-                breedRepository = breedRepo
+                appointmentRepository = app.appointmentRepository,
+                breedRepository = app.breedRepository
             )
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,7 +46,6 @@ class NewAppointmentFragment : Fragment() {
         binding.toolbar.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
-
 
         binding.btnSaveAppointment.setOnClickListener {
             val selectedSymptom = binding.spinnerSymptoms.selectedItem?.toString().orEmpty()
