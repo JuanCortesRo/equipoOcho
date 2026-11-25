@@ -31,5 +31,25 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.35" />
 
+        <!-- KAN-24 (HU 1.0 C3): titulo "DogApp" centrado debajo de la imagen.
+             - fontFamily="@font/poppins_bold": fuente en res/font. Ya es la variante Bold, por eso
+               NO se usa textStyle="bold" (evita negrita falsa doble).
+             - textSize en sp (no dp): respeta el tamano de letra que el usuario configuro (accesibilidad).
+             - text="@string/dog_app_title": el texto vive en strings.xml, no escrito a mano.
+             - Blanco sobre dark_gray (#263238): contraste alto.
+             - Start/End anclados a imgDogHead (no al padre): el titulo se centra respecto a la IMAGEN. -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/dog_app_title"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@id/imgDogHead"
+            app:layout_constraintStart_toStartOf="@id/imgDogHead"
+            app:layout_constraintTop_toBottomOf="@id/imgDogHead" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
