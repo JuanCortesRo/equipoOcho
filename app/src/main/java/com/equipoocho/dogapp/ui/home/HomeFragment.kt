@@ -8,9 +8,12 @@ import androidx.fragment.app.Fragment
 import com.equipoocho.dogapp.databinding.FragmentHomeBinding
 
 /**
- * HU 2.0 – Home Administrador de Citas.
- * TODO [KAN HU2.0] C1: el botón atrás debe salir al escritorio. Se resuelve con popUpTo inclusive
- *  en action_login_to_home (nav_graph); verificarlo en el dispositivo.
+ * Home: lista de citas.
+ *
+ * Botón atrás: este Fragment no lo intercepta a propósito. La acción action_login_to_home saca el Login
+ * del historial (popUpTo inclusive en nav_graph.xml), así que el Home es la primera pantalla y atrás
+ * cierra la app en vez de volver al Login.
+ *
  * TODO [KAN HU2.0] C2: fondo blanco; header gris oscuro con la esquina inferior izquierda curva, título
  *  "Administrador de Citas" blanco bold a la izquierda y centrado verticalmente; imagen del perro a la
  *  derecha con "DogApp" debajo.
