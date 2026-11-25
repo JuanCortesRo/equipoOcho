@@ -84,5 +84,20 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_appointment" />
 
+        <!-- Botón flotante para crear una cita. navigationBarMargin: en Android 15+ suma el alto de la
+             barra de navegación al margen, para no quedar encima de ella. -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/cd_add_appointment"
+            app:backgroundTint="@color/pink"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:navigationBarMargin="@{true}"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/white" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

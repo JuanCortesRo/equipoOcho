@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.equipoocho.dogapp.databinding.FragmentHomeBinding
 
 /**
@@ -16,7 +17,6 @@ import com.equipoocho.dogapp.databinding.FragmentHomeBinding
  *
  * TODO [KAN HU2.0] C5: al tocar un ítem, navegar a action_home_to_detail(appointmentId).
  * TODO [KAN HU2.0] C6: observar HomeViewModel.appointments y pasar la lista al adapter (submitList).
- * TODO [KAN HU2.0] C4: FAB rosado #F05861 abajo a la derecha que lleva a action_home_to_newAppointment.
  */
 class HomeFragment : Fragment() {
 
@@ -34,6 +34,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvAppointments.adapter = appointmentAdapter
+
+        binding.fabAddAppointment.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeToNewAppointment())
+        }
     }
 
     override fun onDestroyView() {
