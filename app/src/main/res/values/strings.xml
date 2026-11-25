@@ -10,7 +10,7 @@
     <string name="biometric_cancel">Cancelar</string>
 
     <!-- HU 2.0 Home -->
-    <string name="home_title">Administrador de Citas</string>
+    <string name="home_title">Administrador\nde Citas</string>
     <string name="appointment_turn">#%1$d</string>
 
     <!-- HU 3.0 / HU 5.0 Formularios -->
