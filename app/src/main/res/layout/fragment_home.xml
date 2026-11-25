@@ -22,14 +22,14 @@
             android:background="@drawable/bg_home_header"
             android:paddingStart="32dp"
             android:paddingTop="8dp"
-            android:paddingBottom="12dp"
+            android:paddingBottom="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imgHeaderDog"
-                android:layout_width="112dp"
+                android:layout_width="118dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:importantForAccessibility="no"
@@ -43,14 +43,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dog_app_title"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="17sp"
+                android:paddingTop="11dp"
                 android:textStyle="bold"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="@id/imgHeaderDog"
                 app:layout_constraintTop_toBottomOf="@id/imgHeaderDog" />
 
-            <!-- Centrado en el espacio a la izquierda de la imagen, con las dos líneas centradas entre sí.
-                 El salto de línea va en @string/home_title (dos líneas, como en el diseño). -->
             <TextView
                 android:id="@+id/tvHeaderTitle"
                 android:layout_width="wrap_content"
@@ -59,10 +58,11 @@
                 android:gravity="center"
                 android:text="@string/home_title"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/imgHeaderDog"
+                app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
