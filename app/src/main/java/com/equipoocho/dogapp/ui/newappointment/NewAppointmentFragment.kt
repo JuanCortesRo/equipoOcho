@@ -8,8 +8,10 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.equipoocho.dogapp.R
 import com.equipoocho.dogapp.databinding.FragmentNewAppointmentBinding
 import com.equipoocho.dogapp.ui.common.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class NewAppointmentFragment : Fragment() {
 
@@ -37,7 +39,22 @@ class NewAppointmentFragment : Fragment() {
         binding.toolbar.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.btnSaveAppointment.setOnClickListener {
+            viewModel.onSaveClicked()
+        }
 
+        viewModel.selectSymptomEvent.observe(viewLifecycleOwner) { show ->
+            if (show == true) {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.select_symptom),
+                    Snackbar.LENGTH_SHORT
+                )
+                    .setAnchorView(binding.btnSaveAppointment)
+                    .show()
+                viewModel.consumeSelectSymptomEvent()
+            }
+        }
         viewModel.breeds.observe(viewLifecycleOwner) { breeds ->
             val adapter = ArrayAdapter(
                 requireContext(),

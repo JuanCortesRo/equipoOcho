@@ -37,6 +37,8 @@ class NewAppointmentViewModel(
         addSource(phone) { value = checkFormValid() }
     }
     val isFormValid: LiveData<Boolean> = _isFormValid
+    private val _selectSymptomEvent = MutableLiveData<Boolean>(false)
+    val selectSymptomEvent: LiveData<Boolean> = _selectSymptomEvent
     private val _breeds = MutableLiveData<List<String>>(emptyList())
     val breeds: LiveData<List<String>> = _breeds
 
@@ -48,6 +50,17 @@ class NewAppointmentViewModel(
             !breed.value.isNullOrBlank() &&
             !ownerName.value.isNullOrBlank() &&
             !phone.value.isNullOrBlank()
+    }
+    fun onSaveClicked() {
+        val currentSymptomPos = symptomPosition.value ?: 0
+        if (currentSymptomPos == 0) {
+            _selectSymptomEvent.value = true
+            return
+        }
+    }
+
+    fun consumeSelectSymptomEvent() {
+        _selectSymptomEvent.value = false
     }
     private fun loadBreeds() {
         viewModelScope.launch {
