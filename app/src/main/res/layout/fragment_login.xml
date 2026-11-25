@@ -12,7 +12,24 @@
         android:layout_height="match_parent"
         android:background="@color/dark_gray">
 
-        <!-- TODO: construir la UI según los criterios de la HU (ver el Fragment correspondiente). -->
+        <!-- KAN-23 (HU 1.0 C2): cabeza del perro arriba a la derecha.
+             - layout_width="0dp" + layout_constraintWidth_percent: el ancho es una fracción (35%) del
+               padre, así la imagen escala en cualquier tamaño de pantalla (en vez de dp fijos).
+             - adjustViewBounds: la altura sigue la proporción de la imagen, sin deformarla.
+             - importantForAccessibility="no": es decorativa, TalkBack no debe anunciarla. -->
+        <ImageView
+            android:id="@+id/imgDogHead"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:adjustViewBounds="true"
+            android:importantForAccessibility="no"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_dog_head"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.35" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
