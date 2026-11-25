@@ -67,5 +67,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- Lista de citas debajo del header. clipToPadding="false": el padding inferior deja espacio
+             para que el último ítem no quede tapado por el botón flotante, sin recortar el scroll. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAppointments"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="88dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_appointment" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

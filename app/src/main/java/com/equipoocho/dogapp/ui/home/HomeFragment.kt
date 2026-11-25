@@ -14,10 +14,8 @@ import com.equipoocho.dogapp.databinding.FragmentHomeBinding
  * del historial (popUpTo inclusive en nav_graph.xml), así que el Home es la primera pantalla y atrás
  * cierra la app en vez de volver al Login.
  *
- * TODO [KAN HU2.0] C2: fondo blanco; header gris oscuro con la esquina inferior izquierda curva, título
- *  "Administrador de Citas" blanco bold a la izquierda y centrado verticalmente; imagen del perro a la
- *  derecha con "DogApp" debajo.
- * TODO [KAN HU2.0] C3/C5/C6: RecyclerView con AppointmentAdapter que observa HomeViewModel.appointments.
+ * TODO [KAN HU2.0] C5: al tocar un ítem, navegar a action_home_to_detail(appointmentId).
+ * TODO [KAN HU2.0] C6: observar HomeViewModel.appointments y pasar la lista al adapter (submitList).
  * TODO [KAN HU2.0] C4: FAB rosado #F05861 abajo a la derecha que lleva a action_home_to_newAppointment.
  */
 class HomeFragment : Fragment() {
@@ -25,14 +23,24 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val appointmentAdapter = AppointmentAdapter()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.rvAppointments.adapter = appointmentAdapter
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        // Suelta la referencia del RecyclerView al adapter: el adapter vive tanto como el Fragment,
+        // pero la vista se destruye antes (p. ej., al ir a otra pantalla), y así no se retiene.
+        binding.rvAppointments.adapter = null
         _binding = null
     }
 }
