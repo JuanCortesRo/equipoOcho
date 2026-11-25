@@ -78,8 +78,30 @@ Cada archivo trae comentarios `TODO [KAN HUx.x] Cn` con el criterio de aceptaci�
 | Autocompletar la raza (HU 3.0 / 5.0) | `GET breeds/list/all` |
 | Foto de la mascota según su raza (HU 3.0 / 5.0, "Importante") | `GET breed/{raza}/images/random` |
 
+### Navegación (Safe Args)
+Todas las pantallas navegan con las clases que genera Safe Args a partir de `nav_graph.xml`. No se usan IDs sueltos:
+
+```kotlin
+findNavController().navigate(HomeFragmentDirections.actionHomeToDetail(appointment.id))
+// en el destino:
+private val args: AppointmentDetailFragmentArgs by navArgs()   // args.appointmentId
+```
+
+| Desde | Acción | Hacia | Después, el botón atrás… |
+|---|---|---|---|
+| Login | `LoginFragmentDirections.actionLoginToHome()` | Home | …sale de la app (el Login sale del historial) |
+| Home | `HomeFragmentDirections.actionHomeToNewAppointment()` | Nueva Cita | …vuelve al Home |
+| Home | `HomeFragmentDirections.actionHomeToDetail(appointmentId)` | Detalle | …vuelve al Home |
+| Nueva Cita | `NewAppointmentFragmentDirections.actionNewAppointmentToHome()` (tras guardar) | Home | …sale de la app (el formulario sale del historial) |
+| Nueva Cita | flecha atrás → `findNavController().navigateUp()` | Home | — |
+| Detalle | `AppointmentDetailFragmentDirections.actionDetailToEdit(appointmentId)` | Editar | …vuelve al Detalle |
+| Detalle | `AppointmentDetailFragmentDirections.actionDetailToHome()` (tras eliminar) | Home | …sale de la app (la cita eliminada sale del historial) |
+| Detalle | flecha atrás → `findNavController().navigateUp()` | Home | — |
+| Editar | `EditAppointmentFragmentDirections.actionEditToHome()` (tras editar) | Home | …sale de la app |
+| Editar | flecha atrás → `findNavController().navigateUp()` | Detalle | — |
+
 ## Cómo correr el proyecto
-1. Clonar: `git clone https://github.com/JuanCortesRo/EquipoOcho.git`. Luego `git checkout develop`.
+1. Clonar: `git clone https://github.com/JuanCortesRo/equipoOcho.git`. Luego `git checkout develop`.
 2. En Android Studio: **File → Open**, elegir la carpeta del proyecto y esperar el *Gradle Sync*. Android Studio crea `local.properties` con la ruta de tu SDK.
 3. Requisitos: SDK de Android con **API 37** y JDK 21 o superior (el JBR de Android Studio sirve).
 4. Ejecutar en un emulador o dispositivo con **API 26 o superior**. Para probar la huella en el emulador:
