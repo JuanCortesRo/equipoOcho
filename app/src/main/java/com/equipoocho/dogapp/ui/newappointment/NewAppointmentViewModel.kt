@@ -1,6 +1,7 @@
 package com.equipoocho.dogapp.ui.newappointment
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,13 +29,26 @@ class NewAppointmentViewModel(
     val ownerName = MutableLiveData("")
     val phone = MutableLiveData("")
     val symptomPosition = MutableLiveData(0)
+    private val _isFormValid = MediatorLiveData<Boolean>().apply {
+        value = false
+        addSource(petName) { value = checkFormValid() }
+        addSource(breed) { value = checkFormValid() }
+        addSource(ownerName) { value = checkFormValid() }
+        addSource(phone) { value = checkFormValid() }
+    }
+    val isFormValid: LiveData<Boolean> = _isFormValid
     private val _breeds = MutableLiveData<List<String>>(emptyList())
     val breeds: LiveData<List<String>> = _breeds
 
     init {
         loadBreeds()
     }
-
+    private fun checkFormValid(): Boolean {
+        return !petName.value.isNullOrBlank() &&
+            !breed.value.isNullOrBlank() &&
+            !ownerName.value.isNullOrBlank() &&
+            !phone.value.isNullOrBlank()
+    }
     private fun loadBreeds() {
         viewModelScope.launch {
             _breeds.value = try {

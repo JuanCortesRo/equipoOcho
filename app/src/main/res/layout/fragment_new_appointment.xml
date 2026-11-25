@@ -132,6 +132,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilPhone" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveAppointment"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:alpha="@{safeUnbox(viewModel.isFormValid) ? 1.0f : 0.5f}"
+            android:enabled="@{viewModel.isFormValid}"
+            android:text="@string/save_appointment"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/pink"
+            app:cornerRadius="28dp"
+            app:icon="@android:drawable/ic_menu_save"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnerSymptoms" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
