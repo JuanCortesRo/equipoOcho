@@ -14,12 +14,23 @@ import com.equipoocho.dogapp.databinding.ItemAppointmentBinding
  * Es un ListAdapter: basta con llamar submitList(nuevaLista) y DiffUtil calcula en segundo plano qué
  * ítems se agregaron, cambiaron o eliminaron, animando solo esos en vez de redibujar toda la lista.
  *
- * TODO [KAN HU2.0] C5: callback onClick(appointment) que navega a action_home_to_detail(appointmentId).
+ * @param onItemClick se llama con la cita del ítem tocado; quien crea el adapter decide qué hacer
+ *  (el adapter no navega ni conoce otras pantallas).
  */
-class AppointmentAdapter : ListAdapter<AppointmentEntity, AppointmentAdapter.ViewHolder>(DiffCallback) {
+class AppointmentAdapter(
+    private val onItemClick: (AppointmentEntity) -> Unit
+) : ListAdapter<AppointmentEntity, AppointmentAdapter.ViewHolder>(DiffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(ItemAppointmentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val holder = ViewHolder(ItemAppointmentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        // El listener se asigna una sola vez por ViewHolder (no en cada bind) y busca la cita por la
+        // posición actual, así sigue siendo correcto aunque la lista cambie o el ítem se recicle.
+        holder.itemView.setOnClickListener {
+            val position = holder.bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION) onItemClick(getItem(position))
+        }
+        return holder
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
 

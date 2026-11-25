@@ -15,7 +15,6 @@ import com.equipoocho.dogapp.databinding.FragmentHomeBinding
  * del historial (popUpTo inclusive en nav_graph.xml), así que el Home es la primera pantalla y atrás
  * cierra la app en vez de volver al Login.
  *
- * TODO [KAN HU2.0] C5: al tocar un ítem, navegar a action_home_to_detail(appointmentId).
  * TODO [KAN HU2.0] C6: observar HomeViewModel.appointments y pasar la lista al adapter (submitList).
  */
 class HomeFragment : Fragment() {
@@ -23,7 +22,9 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val appointmentAdapter = AppointmentAdapter()
+    private val appointmentAdapter = AppointmentAdapter { appointment ->
+        findNavController().navigate(HomeFragmentDirections.actionHomeToDetail(appointment.id))
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
