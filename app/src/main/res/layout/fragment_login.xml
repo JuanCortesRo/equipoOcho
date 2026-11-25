@@ -51,5 +51,28 @@
             app:layout_constraintStart_toStartOf="@id/imgDogHead"
             app:layout_constraintTop_toBottomOf="@id/imgDogHead" />
 
+        <!-- KAN-25 (HU 1.0 C4): animacion Lottie de huella, abajo al centro.
+             - lottie_rawRes: el JSON vive en res/raw (fingerprint_scan.json).
+             - lottie_autoPlay + lottie_loop: arranca sola y se repite sin parar.
+             - 0dp + layout_constraintWidth_percent + dimensionRatio 1:1: cuadrada y responsive.
+             - clickable/focusable + contentDescription: es el elemento que se toca para abrir la
+               biometria (KAN-26), asi que TalkBack debe anunciarlo y tiene tamano tactil > 48dp. -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieFingerprint"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="48dp"
+            android:clickable="true"
+            android:contentDescription="@string/login_fingerprint_description"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.4"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/fingerprint_scan" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
