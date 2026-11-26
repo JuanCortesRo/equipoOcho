@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  HU 2.0 C3 – Ítem de la lista de citas. Lo usa AppointmentAdapter.
-  TODO [KAN HU2.0]: MaterialCardView blanca, redondeada y con elevación; ImageView circular
-   (app:imageUrl="@{appointment.imageUrl}" app:circleCrop="@{true}"), petName, symptom y "#id" arriba a la derecha.
+  Ítem de la lista de citas del Home (lo usa AppointmentAdapter).
+  Tarjeta blanca con bordes redondeados y elevación: imagen circular de la mascota a la izquierda,
+  síntoma centrado verticalmente con la imagen y el nombre justo encima, y el turno (id autogenerado
+  por Room) arriba a la derecha.
 -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -16,15 +18,76 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardElevation="@dimen/card_elevation">
+        app:cardElevation="@dimen/card_elevation"
+        app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp" />
+            android:padding="12dp">
 
+            <ImageView
+                android:id="@+id/imgPet"
+                android:layout_width="@dimen/item_image_size"
+                android:layout_height="@dimen/item_image_size"
+                android:contentDescription="@string/cd_dog_image"
+                app:circleCrop="@{true}"
+                app:imageUrl="@{appointment.imageUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_pet_placeholder" />
+
+            <TextView
+                android:id="@+id/tvTurn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/appointment_turn(appointment.id)}"
+                android:textColor="@color/pink"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:translationY="-4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="#1" />
+
+            <TextView
+                android:id="@+id/tvPetName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginBottom="8dp"
+                android:text="@{appointment.petName}"
+                android:textColor="@color/dark_gray"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tvSymptom"
+                app:layout_constraintEnd_toStartOf="@id/tvTurn"
+                app:layout_constraintStart_toEndOf="@id/imgPet"
+                tools:text="Cory" />
+
+            <TextView
+                android:id="@+id/tvSymptom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{appointment.symptom}"
+                android:textColor="@color/hint_gray"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/imgPet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgPet"
+                app:layout_constraintTop_toTopOf="@id/imgPet"
+                tools:text="Fractura extremidad" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
