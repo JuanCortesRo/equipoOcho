@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FAF4F8">
+        android:background="@color/detail_background">
 
         <include
             android:id="@+id/toolbar"

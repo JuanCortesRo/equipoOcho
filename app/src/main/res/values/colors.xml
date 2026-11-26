@@ -5,6 +5,7 @@
     <color name="pink">#FFF05861</color>           <!-- FAB, botones Guardar/Editar, flechas y línea -->
     <color name="focus_purple">#FF6750A4</color>   <!-- borde de los campos con foco -->
     <color name="dark_blue">#FF1F2937</color>      <!-- FAB editar (HU 4.0 C5) -->
+    <color name="detail_background">#FFFAF4F8</color> <!-- fondo de la pantalla de detalle -->
     <color name="hint_gray">#FF8A8A8A</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
