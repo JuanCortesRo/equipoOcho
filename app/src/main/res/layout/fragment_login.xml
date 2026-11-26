@@ -12,64 +12,85 @@
         android:layout_height="match_parent"
         android:background="@color/dark_gray">
 
-        <!-- KAN-23 (HU 1.0 C2): cabeza del perro arriba a la derecha.
-             - layout_width="0dp" + layout_constraintWidth_percent: el ancho es una fracción (35%) del
-               padre, así la imagen escala en cualquier tamaño de pantalla (en vez de dp fijos).
-             - adjustViewBounds: la altura sigue la proporción de la imagen, sin deformarla.
-             - importantForAccessibility="no": es decorativa, TalkBack no debe anunciarla. -->
+        <!-- Guias (lineas invisibles en porcentaje del padre). Sirven de limite para que el layout
+             se adapte a cualquier pantalla (C2): en pantallas cortas o en horizontal los elementos se
+             encogen en vez de taparse entre si.
+             - glImageMaxBottom: la imagen del perro nunca baja del 45% de la altura.
+             - glFingerprintStart/End: la huella ocupa el 58% central del ancho (del 21% al 79%). -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glImageMaxBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glFingerprintStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.21" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glFingerprintEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.79" />
+
+        <!-- KAN-23 (C2): cabeza del perro arriba a la derecha.
+             - layout_constrainedHeight + bottom a glImageMaxBottom: la altura tiene tope (45%).
+             - adjustViewBounds + scaleType fitEnd: conserva la proporcion y se pega arriba a la derecha.
+             - importantForAccessibility="no": es decorativa, TalkBack no la anuncia. -->
         <ImageView
             android:id="@+id/imgDogHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
             android:adjustViewBounds="true"
             android:importantForAccessibility="no"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:src="@drawable/img_dog_head"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/glImageMaxBottom"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.35" />
+            app:layout_constraintVertical_bias="0" />
 
-        <!-- KAN-24 (HU 1.0 C3): titulo "DogApp" centrado debajo de la imagen.
-             - fontFamily="@font/poppins_bold": fuente en res/font. Ya es la variante Bold, por eso
-               NO se usa textStyle="bold" (evita negrita falsa doble).
-             - textSize en sp (no dp): respeta el tamano de letra que el usuario configuro (accesibilidad).
-             - text="@string/dog_app_title": el texto vive en strings.xml, no escrito a mano.
-             - Blanco sobre dark_gray (#263238): contraste alto.
-             - Start/End anclados a imgDogHead (no al padre): el titulo se centra respecto a la IMAGEN. -->
+        <!-- KAN-24 (C3): titulo "DogApp" con fuente externa (res/font), blanco.
+             - lilita_one ya es de trazo grueso: NO se usa textStyle="bold" (seria negrita doble).
+             - textSize en sp: respeta el tamano de letra que el usuario configuro en el sistema.
+             - Apoyado en la base de la imagen (con 10dp de margen), centrado en la pantalla. -->
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_bold"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/lilita_one"
             android:text="@string/dog_app_title"
             android:textColor="@android:color/white"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="@id/imgDogHead"
-            app:layout_constraintStart_toStartOf="@id/imgDogHead"
-            app:layout_constraintTop_toBottomOf="@id/imgDogHead" />
+            android:textSize="76sp"
+            app:layout_constraintBottom_toBottomOf="@id/imgDogHead"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- KAN-25 (HU 1.0 C4): animacion Lottie de huella, abajo al centro.
-             - lottie_rawRes: el JSON vive en res/raw (fingerprint_scan.json).
-             - lottie_autoPlay + lottie_loop: arranca sola y se repite sin parar.
-             - 0dp + layout_constraintWidth_percent + dimensionRatio 1:1: cuadrada y responsive.
-             - clickable/focusable + contentDescription: es el elemento que se toca para abrir la
-               biometria (KAN-26), asi que TalkBack debe anunciarlo y tiene tamano tactil > 48dp. -->
+        <!-- KAN-25 (C4): animacion Lottie de huella. Es el elemento que se toca para abrir la biometria.
+             - width y height en 0dp + dimensionRatio 1:1: ConstraintLayout toma el cuadrado mas grande
+               que cabe entre las guias y bajo el titulo; si falta espacio, se encoge sin tapar el titulo.
+             - contentDescription con cd_fingerprint (string compartido del equipo). -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieFingerprint"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="48dp"
             android:clickable="true"
-            android:contentDescription="@string/login_fingerprint_description"
+            android:contentDescription="@string/cd_fingerprint"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintEnd_toEndOf="@id/glFingerprintEnd"
+            app:layout_constraintStart_toStartOf="@id/glFingerprintStart"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintVertical_bias="0.28"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/fingerprint_scan" />
