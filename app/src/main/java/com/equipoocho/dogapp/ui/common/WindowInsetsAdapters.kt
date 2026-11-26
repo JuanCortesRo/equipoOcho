@@ -1,10 +1,12 @@
 package com.equipoocho.dogapp.ui.common
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnAttach
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.databinding.BindingAdapter
 
@@ -36,5 +38,29 @@ fun View.applyStatusBarPadding(enabled: Boolean = true) {
     }
     // Una vista que se agrega después del primer layout no siempre recibe los insets sola,
     // así que se piden de nuevo al adjuntarla a la ventana.
+    doOnAttach { it.requestApplyInsets() }
+}
+
+/**
+ * Suma el alto de la barra de navegación inferior (gestos o botones) al margen inferior de la vista.
+ *
+ * Con targetSdk 35+ la app también se dibuja detrás de esa barra: un botón flotante con solo su margen
+ * quedaría encima de ella y competiría con el gesto de inicio. En versiones anteriores el inset que
+ * llega es 0 y el margen queda igual. A diferencia de [applyStatusBarPadding], no consume el inset.
+ *
+ * Uso en Kotlin: view.applyNavigationBarMargin()
+ * Uso en XML con DataBinding: app:navigationBarMargin="@{true}"
+ */
+@BindingAdapter("navigationBarMargin")
+fun View.applyNavigationBarMargin(enabled: Boolean = true) {
+    if (!enabled) return
+    val initialBottom = (layoutParams as? ViewGroup.MarginLayoutParams)?.bottomMargin ?: 0
+    ViewCompat.setOnApplyWindowInsetsListener(this) { view, insets ->
+        val navigationBarBottom = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+        view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            bottomMargin = initialBottom + navigationBarBottom
+        }
+        insets
+    }
     doOnAttach { it.requestApplyInsets() }
 }
