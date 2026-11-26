@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- HU 4.0 – Detalle: include layout_curved_toolbar, CardView con la imagen, tarjeta de datos y 2 FAB. -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -11,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="#FAF4F8">
 
         <include
             android:id="@+id/toolbar"
@@ -26,31 +25,33 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/detailsCard"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_padding"
+            android:layout_marginTop="-110dp"
             android:layout_marginEnd="@dimen/screen_padding"
-            android:layout_marginTop="-56dp"
-            android:layout_marginBottom="88dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="@dimen/card_elevation"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageCard">
+            app:layout_constraintTop_toBottomOf="@id/imageCard"
+            app:strokeWidth="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/screen_padding">
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/screen_padding"
+                android:paddingTop="@dimen/screen_padding"
+                android:paddingEnd="@dimen/screen_padding"
+                android:paddingBottom="24dp">
 
                 <TextView
                     android:id="@+id/tvTurn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{@string/appointment_turn(viewModel.appointment.id)}"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/pink"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -60,34 +61,36 @@
                     android:id="@+id/tvBreed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="72dp"
+                    android:layout_marginTop="112dp"
+                    android:gravity="center"
                     android:text="@{viewModel.appointment.breed}"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Labrador Retriever" />
+                    tools:text="pitbull" />
 
                 <TextView
                     android:id="@+id/tvSymptom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
                     android:text="@{viewModel.appointment.symptom}"
                     android:textColor="@color/dark_gray"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvBreed"
-                    tools:text="No come" />
+                    tools:text="Tiene garrapatas" />
 
                 <View
                     android:id="@+id/pinkDivider"
                     android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_height="1.5dp"
+                    android:layout_marginTop="8dp"
                     android:background="@color/pink"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -97,14 +100,14 @@
                     android:id="@+id/tvOwner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:text="@{@string/owner_label(viewModel.appointment.ownerName)}"
                     android:textColor="@color/dark_gray"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pinkDivider"
-                    tools:text="Propietario: Juan Pérez" />
+                    tools:text="Propietario: Walter" />
 
                 <TextView
                     android:id="@+id/tvPhone"
@@ -117,7 +120,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvOwner"
-                    tools:text="Teléfono: 3001234567" />
+                    tools:text="Teléfono: 3045675518" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -125,19 +128,21 @@
             android:id="@+id/imageCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="@dimen/card_elevation"
+            android:layout_marginTop="48dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:strokeWidth="0dp">
 
             <ImageView
                 android:id="@+id/ivPetImage"
-                android:layout_width="@dimen/detail_image_size"
-                android:layout_height="@dimen/detail_image_size"
+                android:layout_width="185dp"
+                android:layout_height="185dp"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/screen_padding"
+                android:layout_margin="5dp"
                 android:contentDescription="@string/cd_dog_image"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{viewModel.appointment.imageUrl}"
@@ -148,12 +153,12 @@
             android:id="@+id/fabDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_padding"
-            android:layout_marginBottom="24dp"
+            android:layout_margin="16dp"
             android:contentDescription="@string/cd_delete_appointment"
             app:backgroundTint="@color/pink"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:navigationBarMargin="@{true}"
             app:srcCompat="@drawable/ic_delete"
             app:tint="@color/white" />
 
@@ -161,12 +166,12 @@
             android:id="@+id/fabEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/screen_padding"
-            android:layout_marginBottom="24dp"
+            android:layout_margin="16dp"
             android:contentDescription="@string/cd_edit_appointment"
             app:backgroundTint="@color/dark_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:navigationBarMargin="@{true}"
             app:srcCompat="@drawable/ic_edit"
             app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
