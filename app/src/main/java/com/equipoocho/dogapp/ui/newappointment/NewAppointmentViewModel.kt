@@ -11,18 +11,15 @@ import com.equipoocho.dogapp.data.repository.BreedRepository
 import kotlinx.coroutines.launch
 
 /**
- * HU 3.0 – ViewModel de Nueva Cita (recibe AppointmentRepository y BreedRepository).
- * TODO [KAN HU3.0] C2-C5: MutableLiveData<String> ownerName, phone para two-way binding (@={}).
- * TODO [KAN HU3.0] C6: `symptom` seleccionado; "Síntomas" (posición 0) cuenta como no seleccionado.
- * TODO [KAN HU3.0] C7/C9: `isFormValid: LiveData<Boolean>` (los 4 campos con texto) que controla el
- *  android:enabled del botón.
- * TODO [KAN HU3.0] C8: evento "Selecciona un síntoma" si no hay síntoma al guardar.
- * TODO [KAN HU3.0] C10 + Importante: obtener imageUrl con BreedRepository.getRandomImageUrl(breed),
- *  guardar con Room y emitir el evento de navegar al Home.
+ * ViewModel de Nueva Cita.
+ *
+ * Los campos usan two-way binding (@={}); [isFormValid] habilita el botón cuando los cuatro campos de
+ * texto tienen contenido. Al guardar, pide a dog.ceo una imagen de la raza (puede ser null si la raza
+ * no existe o no hay red; la cita se guarda igual) y navega al Home cuando Room terminó de guardar.
  */
 class NewAppointmentViewModel(
-    private val appointmentRepository: AppointmentRepository? = null,
-    private val breedRepository: BreedRepository? = null
+    private val appointmentRepository: AppointmentRepository,
+    private val breedRepository: BreedRepository
 ) : ViewModel() {
 
     val petName = MutableLiveData("")
@@ -68,11 +65,7 @@ class NewAppointmentViewModel(
         val cleanSymptom = selectedSymptom.trim()
 
         viewModelScope.launch {
-            val resolvedImageUrl = try {
-                breedRepository?.getRandomImageUrl(cleanBreed)
-            } catch (_: Throwable) {
-                null
-            }
+            val resolvedImageUrl = breedRepository.getRandomImageUrl(cleanBreed)
 
             val entity = AppointmentEntity(
                 petName = cleanPetName,
@@ -83,10 +76,7 @@ class NewAppointmentViewModel(
                 imageUrl = resolvedImageUrl
             )
 
-            try {
-                appointmentRepository?.saveAppointment(entity)
-            } catch (_: Throwable) {
-            }
+            appointmentRepository.saveAppointment(entity)
 
             _navigateToHomeEvent.value = true
         }
@@ -99,11 +89,7 @@ class NewAppointmentViewModel(
     }
     private fun loadBreeds() {
         viewModelScope.launch {
-            _breeds.value = try {
-                breedRepository?.getBreeds() ?: emptyList()
-            } catch (_: Throwable) {
-                emptyList()
-            }
+            _breeds.value = breedRepository.getBreeds()
         }
     }
 }
