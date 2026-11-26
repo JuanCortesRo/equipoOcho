@@ -5,31 +5,56 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.equipoocho.dogapp.DogApp
 import com.equipoocho.dogapp.databinding.FragmentHomeBinding
+import com.equipoocho.dogapp.ui.common.ViewModelFactory
 
 /**
- * HU 2.0 – Home Administrador de Citas.
- * TODO [KAN HU2.0] C1: el botón atrás debe salir al escritorio. Se resuelve con popUpTo inclusive
- *  en action_login_to_home (nav_graph); verificarlo en el dispositivo.
- * TODO [KAN HU2.0] C2: fondo blanco; header gris oscuro con la esquina inferior izquierda curva, título
- *  "Administrador de Citas" blanco bold a la izquierda y centrado verticalmente; imagen del perro a la
- *  derecha con "DogApp" debajo.
- * TODO [KAN HU2.0] C3/C5/C6: RecyclerView con AppointmentAdapter que observa HomeViewModel.appointments.
- * TODO [KAN HU2.0] C4: FAB rosado #F05861 abajo a la derecha que lleva a action_home_to_newAppointment.
+ * Home: lista de citas.
+ *
+ * Botón atrás: este Fragment no lo intercepta a propósito. La acción action_login_to_home saca el Login
+ * del historial (popUpTo inclusive en nav_graph.xml), así que el Home es la primera pantalla y atrás
+ * cierra la app en vez de volver al Login.
  */
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: HomeViewModel by viewModels {
+        ViewModelFactory { HomeViewModel((requireActivity().application as DogApp).appointmentRepository) }
+    }
+
+    private val appointmentAdapter = AppointmentAdapter { appointment ->
+        findNavController().navigate(HomeFragmentDirections.actionHomeToDetail(appointment.id))
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.rvAppointments.adapter = appointmentAdapter
+        viewModel.appointments.observe(viewLifecycleOwner) { appointments ->
+            appointmentAdapter.submitList(appointments)
+        }
+
+        binding.fabAddAppointment.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeToNewAppointment())
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Suelta la referencia del RecyclerView al adapter: el adapter vive tanto como el Fragment,
+        // pero la vista se destruye antes (p. ej., al ir a otra pantalla), y así no se retiene.
+        binding.rvAppointments.adapter = null
         _binding = null
     }
 }

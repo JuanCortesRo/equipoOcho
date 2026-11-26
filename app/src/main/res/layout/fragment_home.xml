@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- HU 2.0 – Home Administrador de Citas: header (bg_home_header), RecyclerView y FAB. -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -13,7 +12,92 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <!-- TODO: construir la UI según los criterios de la HU (ver el Fragment correspondiente). -->
+        <!-- Header: gris oscuro con la esquina inferior izquierda curva (bg_home_header).
+             Título a la izquierda, centrado verticalmente; imagen del perro a la derecha con
+             "DogApp" debajo. La imagen va pegada al borde derecho, como en el diseño. -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_home_header"
+            android:paddingStart="32dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgHeaderDog"
+                android:layout_width="118dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:importantForAccessibility="no"
+                android:src="@drawable/img_dog_head"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvHeaderBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dog_app_title"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:paddingTop="11dp"
+                android:textStyle="bold"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="@id/imgHeaderDog"
+                app:layout_constraintTop_toBottomOf="@id/imgHeaderDog" />
+
+            <TextView
+                android:id="@+id/tvHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@string/home_title"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imgHeaderDog"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Lista de citas debajo del header. clipToPadding="false": el padding inferior deja espacio
+             para que el último ítem no quede tapado por el botón flotante, sin recortar el scroll. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAppointments"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="88dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_appointment" />
+
+        <!-- Botón flotante para crear una cita. navigationBarMargin: en Android 15+ suma el alto de la
+             barra de navegación al margen, para no quedar encima de ella. -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/cd_add_appointment"
+            app:backgroundTint="@color/pink"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:navigationBarMargin="@{true}"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

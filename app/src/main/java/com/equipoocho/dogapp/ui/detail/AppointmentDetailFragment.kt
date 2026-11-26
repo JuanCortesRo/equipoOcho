@@ -5,26 +5,60 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.equipoocho.dogapp.DogApp
 import com.equipoocho.dogapp.databinding.FragmentAppointmentDetailBinding
+import com.equipoocho.dogapp.ui.common.ViewModelFactory
 
-/**
- * HU 4.0 – Ventana Detalle de la Cita. Argumento: appointmentId (AppointmentDetailFragmentArgs).
- * TODO [KAN HU4.0] C1: toolbar curva con el nombre de la mascota (blanco bold) y flecha rosada que vuelve al Home.
- * TODO [KAN HU4.0] C2: CardView con elevación, esquinas redondeadas y la imagen con margen, superpuesta a la tarjeta blanca.
- * TODO [KAN HU4.0] C3: tarjeta blanca con "#id" arriba a la derecha, raza en negro bold, síntoma, línea rosada,
- *  "Propietario: …" y "Teléfono: …".
- * TODO [KAN HU4.0] C4: FAB rosado de eliminar abajo a la izquierda: elimina y vuelve al Home (action_detail_to_home).
- * TODO [KAN HU4.0] C5: FAB azul oscuro de editar abajo a la derecha que va a action_detail_to_edit(appointmentId).
- */
 class AppointmentDetailFragment : Fragment() {
+
+    private val args: AppointmentDetailFragmentArgs by navArgs()
+
+    private val viewModel: AppointmentDetailViewModel by viewModels {
+        ViewModelFactory {
+            AppointmentDetailViewModel(
+                appointmentRepository = (requireActivity().application as DogApp).appointmentRepository,
+                appointmentId = args.appointmentId
+            )
+        }
+    }
 
     private var _binding: FragmentAppointmentDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAppointmentDetailBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.fabDelete.setOnClickListener {
+            viewModel.deleteAppointment()
+        }
+
+        binding.fabEdit.setOnClickListener {
+            findNavController().navigate(
+                AppointmentDetailFragmentDirections.actionDetailToEdit(args.appointmentId)
+            )
+        }
+
+        viewModel.navigateHomeEvent.observe(viewLifecycleOwner) { navigate ->
+            if (navigate == true) {
+                findNavController().navigate(
+                    AppointmentDetailFragmentDirections.actionDetailToHome()
+                )
+                viewModel.consumeNavigateHomeEvent()
+            }
+        }
     }
 
     override fun onDestroyView() {
